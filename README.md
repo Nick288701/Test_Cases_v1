@@ -2,10 +2,10 @@
 Test cases version 1 for TBD site/app (https://practice.expandtesting.com/)
 
 
-<span style="color: #ff0000">All of my projects will be a work in progress at this time that I will be consecutively updating in-between my normal responsibilities and other normal life circumstances.</span>
+<span style="color: #ff0000"><strong>All of my projects will be a work in progress at this time that I will be consecutively updating in-between my normal responsibilities and other normal life circumstances.</span><strong>
 
 
-<span style="color: #00ff00">This Projects Objective:</span>
+<span style="color: #00ff00"><strong>This Projects Objective:</span><strong>
 
 Automation Testing for the Practice Test Automation Website
 
