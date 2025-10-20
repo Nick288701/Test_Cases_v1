@@ -1,0 +1,440 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #afeeea, #d4e7f0);
+    color: #333;
+    transition: all 0.5s ease;
+}
+
+.banner {
+    width: 100%;
+    height: 200px;
+    background: url('banner.jpg') no-repeat center center;
+    background-size: cover;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background: url('https://www.transparenttextures.com/patterns/clouds.png');
+    animation: cloudMove 20s linear infinite;
+    opacity: 0.3;
+}
+
+@keyframes cloudMove {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+.banner-text {
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 2em;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    z-index: 1;
+}
+
+.content {
+    display: flex;
+}
+
+.sidebar {
+    width: 200px;
+    background: linear-gradient(135deg, #069ef0, #2a6496);
+    padding: 20px 0;
+    min-height: calc(100vh - 200px);
+    transition: width 0.3s ease;
+}
+
+.sidebar.collapsed {
+    width: 60px;
+}
+
+.collapse-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.5em;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    cursor: pointer;
+}
+
+.collapse-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dropdown {
+    position: relative;
+    display: block;
+}
+
+.dropbtn {
+    background: none;
+    color: #fff;
+    padding: 12px 15px;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.dropbtn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background: #7be6d2;
+    min-width: 200px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 5px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    color: #333;
+    padding: 12px 15px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.dropdown-content a:hover {
+    background: #d4f0e6;
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #2a6496;
+    text-align: center;
+}
+
+p {
+    line-height: 1.6;
+    color: #444;
+}
+
+.container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+    color: #2a6496;
+}
+
+input, button {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+button {
+    background: linear-gradient(135deg, #2a6496, #069ef0);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #1a4066, #007bff);
+}
+
+.error {
+    font-size: 14px;
+    text-align: center;
+    color: #d32f2f;
+}
+
+p {
+    text-align: center;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+.tab-nav {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.tab {
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #2a6496, #069ef0);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+    min-width: 100px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.tab:hover {
+    background: linear-gradient(135deg, #1a4066, #007bff);
+}
+
+/* Profile Specific Styles */
+.profile-picture {
+    position: relative;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.profile-icon {
+    width: 100px;
+    height: 100px;
+    background: url('profile-icon.png') no-repeat center center;
+    background-size: contain;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.profile-icon:hover {
+    transform: scale(1.1);
+}
+
+.profile-box {
+    width: 100%;
+    background: linear-gradient(135deg, #e6f0fa, #d4e7f0);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.profile-box button {
+    display: block;
+    width: 90%;
+    margin: 10px auto;
+    background: linear-gradient(135deg, #2a6496, #069ef0);
+    color: #fff;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.profile-box button:hover {
+    background: linear-gradient(135deg, #1a4066, #007bff);
+}
+
+/* Dashboard Specific Styles */
+.dashboard-cards {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 200px;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h2 {
+    color: #2a6496;
+    margin: 0;
+}
+
+.card p {
+    font-size: 1.5em;
+    color: #444;
+    margin: 10px 0 0;
+}
+
+/* Dark Mode */
+body.dark-mode {
+    background: linear-gradient(135deg, #1a2a44, #2a4066);
+    color: #e6f0fa;
+}
+
+body.dark-mode .banner::before {
+    opacity: 0.5;
+}
+
+body.dark-mode .banner-text {
+    background: rgba(0, 0, 0, 0.8);
+    color: #e6f0fa;
+}
+
+body.dark-mode .sidebar {
+    background: linear-gradient(135deg, #341c6a, #2a4066);
+}
+
+body.dark-mode .dropbtn {
+    background: none;
+    color: #e6f0fa;
+}
+
+body.dark-mode .dropbtn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .dropdown-content {
+    background: #2a4066;
+}
+
+body.dark-mode .dropdown-content a {
+    color: #e6f0fa;
+}
+
+body.dark-mode .dropdown-content a:hover {
+    background: #3a5577;
+}
+
+body.dark-mode .main-content {
+    background: rgba(26, 42, 68, 0.9);
+}
+
+body.dark-mode h1 {
+    color: #f0a500;
+}
+
+body.dark-mode .container {
+    background: rgba(42, 64, 102, 0.95);
+}
+
+body.dark-mode .tab {
+    background: linear-gradient(135deg, #5a7bc2, #2a6496);
+}
+
+body.dark-mode .tab:hover {
+    background: linear-gradient(135deg, #3a5577, #1a4066);
+}
+
+body.dark-mode .profile-icon {
+    border-color: #2a4066;
+}
+
+body.dark-mode .profile-box {
+    background: linear-gradient(135deg, #2a4066, #1a2a44);
+}
+
+body.dark-mode .profile-box button {
+    background: linear-gradient(135deg, #5a7bc2, #2a6496);
+}
+
+body.dark-mode .profile-box button:hover {
+    background: linear-gradient(135deg, #3a5577, #1a4066);
+}
+
+body.dark-mode .dashboard-cards .card {
+    background: rgba(42, 64, 102, 0.95);
+}
+
+body.dark-mode .card h2 {
+    color: #f0a500;
+}
+
+body.dark-mode .card p {
+    color: #e6f0fa;
+}
+
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        min-height: auto;
+    }
+    .sidebar.collapsed {
+        width: 60px;
+    }
+    .dropdown-content {
+        position: static;
+        width: 100%;
+        box-shadow: none;
+    }
+    .banner {
+        height: 150px;
+    }
+    .banner-text {
+        font-size: 1.5em;
+    }
+    .profile-picture {
+        margin-left: 0;
+        text-align: center;
+    }
+    .profile-box {
+        width: 90%;
+        margin: 20px auto;
+    }
+    .dashboard-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+    .card {
+        width: 80%;
+    }
+}

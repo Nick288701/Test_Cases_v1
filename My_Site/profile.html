@@ -1,0 +1,135 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="banner">
+        <div class="banner-text">Profile - Nick's Testing Site</div>
+    </div>
+    <div class="content">
+        <aside class="sidebar">
+            <button class="collapse-btn"><i class="fas fa-bars"></i></button>
+            <div class="dropdown">
+                <button class="dropbtn"><i class="fas fa-user"></i> Profile</button>
+                <div class="dropdown-content">
+                    <a href="profile.html"><i class="fas fa-eye"></i> View Profile</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn"><i class="fas fa-tachometer-alt"></i> Dashboard</button>
+                <div class="dropdown-content">
+                    <a href="dashboard.html"><i class="fas fa-eye"></i> View Dashboard</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn"><i class="fas fa-cog"></i> Settings</button>
+                <div class="dropdown-content">
+                    <a href="settings.html"><i class="fas fa-user"></i> Account</a>
+                    <a href="#" id="darkModeToggle"><i class="fas fa-moon"></i> Toggle Dark Mode</a>
+                    <a href="index.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+        </aside>
+        <main class="main-content">
+            <div class="profile-picture">
+                <label for="profileImage">
+                    <div class="profile-icon"></div>
+                </label>
+                <input type="file" id="profileImage" accept="image/*" style="display: none;" onchange="previewImage(event)">
+            </div>
+            <div class="profile-box">
+                <button onclick="window.location.href='edit-profile.html'">Edit Profile</button>
+                <button onclick="window.location.href='settings.html'">Change Password</button>
+                <button onclick="alert('View Activity clicked')">View Activity</button>
+                <button onclick="alert('Contact Info clicked')">Contact Info</button>
+            </div>
+        </main>
+    </div>
+    <script>
+        // Preview and persist profile image
+        function previewImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const icon = document.querySelector('.profile-icon');
+                    icon.style.backgroundImage = `url(${e.target.result})`;
+                    icon.style.backgroundSize = 'cover';
+                    localStorage.setItem('profileImage', e.target.result); // Persist image
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Load persisted profile image
+        const savedImage = localStorage.getItem('profileImage');
+        if (savedImage) {
+            const icon = document.querySelector('.profile-icon');
+            icon.style.backgroundImage = `url(${savedImage})`;
+            icon.style.backgroundSize = 'cover';
+        }
+
+        // Dark mode sync
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const isDarkMode = localStorage.getItem('darkMode') === 'true';
+        if (isDarkMode) document.body.classList.add('dark-mode');
+
+        darkModeToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+        });
+
+        // Sidebar collapse
+        const sidebar = document.querySelector('.sidebar');
+        const collapseBtn = document.querySelector('.collapse-btn');
+        collapseBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+        });
+    </script>
+</body>
+</html>
