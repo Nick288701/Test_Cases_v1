@@ -1,6 +1,6 @@
 # ReadME For my project website and test cases
 
-<span style="color: #ff0000"><strong>All of my projects will be a work in progress at this time they will be consecutively updated in-between my normal responsibilities and other normal life circumstances.</span><strong>
+<span style="color: #ff0000"><strong>All of my projects will be a work in progress at this time. They will be consecutively updated in-between my normal responsibilities and other normal life circumstances.</span><strong>
 
 There will be two projects here while im working on expanding everything out.
 
